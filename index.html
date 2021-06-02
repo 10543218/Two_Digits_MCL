@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+		<title>兩位數乘法-小李</title>
+		
+		<style type="text/css">
+			.title{
+				font-size: 28px;
+				text-align: center;
+			}
+			
+			.question{
+				display: flex;
+				justify-content: center;
+			}
+			
+			
+			.QueText{
+				text-align: center;
+				font-size: 24px;
+				margin-top: 5px;
+				margin-Bottom: 5px;
+				background-color: #EDEDED;
+				border-style: solid;
+				border-width: 1px;
+				height: 45px;
+				width: 300px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 15px;
+			}
+			
+			.QueTextError{
+				text-align: center;
+				font-size: 24px;
+				margin-top: 5px;
+				margin-Bottom: 5px;
+				background-color: #FFCCCC;
+				border-width: 1px;
+				border-style: solid;
+				height: 45px;
+				width: 300px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 15px;
+				
+			}
+			
+			.QueTextTrue{
+				text-align: center;
+				font-size: 24px;
+				margin-top: 5px;
+				margin-Bottom: 5px;
+				background-color: #CCFF99;
+				border-width: 1px;
+				border-style: solid;
+				height: 45px;
+				width: 300px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				border-radius: 15px;
+			}
+			
+			.inputAns{
+				width: 45px;
+				height: 25px;
+				font-size: 16px;
+				text-align: center;
+				outline: none;
+			}
+			
+			.inputAns:focus{
+				border-color: black;
+				border-style: solid;
+			}
+			
+			#score{
+				width: 90px;
+				height: 40px;
+				background-color: #CCCCFF;
+				border-style: solid;
+				border-color: #fff;
+				margin-top: 10px;
+			}
+			
+			#score:hover{
+				background-color: #5555FF;
+				color: white;
+			}
+			
+			
+		</style>
+	</head>
+	<body>
+		<div class='title'>兩位數乘法 作者:小李</div>
+		<br>
+	</body>
+	<script type="text/javascript">
+		var firstNum = new Array(10);
+		var secondNum = new Array(10);
+		for(var i=0; i<10; i++){
+			firstNum[i] = getRandomInt(9)+1;  // 89 10
+			secondNum[i] = getRandomInt(9)+1;;  // 89 10
+			console.log(firstNum[i]+","+secondNum[i]);		
+		}
+		
+		for(var i=0; i<10; i++){
+			document.write("<div class='question'><div class='QueText'>"
+			+"("+(i+1)+")&nbsp&nbsp&nbsp&nbsp"+
+			+firstNum[i]+"&nbsp&nbsp×&nbsp&nbsp"
+			+secondNum[i] + "&nbsp&nbsp=&nbsp&nbsp"
+			+"<input type='text' class='inputAns' />"
+			+"</div></div>");
+		}
+		
+		document.write("<div style='text-align:center;'><input type='button' value='按我交卷' id='score'/></div>");
+		
+		
+		
+		const score = document.getElementById('score');
+		
+		var count = 0;    //計數器
+		var youWrite = Array(10); //考生寫的答案
+		var restart = false;  // 判斷第幾次按按鈕
+		var inputArray = document.getElementsByClassName('inputAns');
+		var quesArray = document.getElementsByClassName('question');
+		var inputAns = document.getElementsByClassName('inputAns');
+		
+	
+		
+		score.addEventListener('click',
+		function(e){
+			for(var i=0; i<10; i++){
+				youWrite[i] = inputAns[i].value;
+				
+				if(firstNum[i]*secondNum[i] == inputArray[i].value){
+					<!-- count += 10; -->
+					quesArray[i].innerHTML = ("<div class='QueTextTrue'>"
+						+"("+(i+1)+")&nbsp&nbsp&nbsp&nbsp"+
+						+firstNum[i]+"&nbsp&nbsp×&nbsp&nbsp"
+						+secondNum[i] + "&nbsp&nbsp=&nbsp&nbsp"
+						+"<input type='text' class='inputAns'/>"
+						+"</div>");
+				}else{
+					trueResult = firstNum[i]*secondNum[i];
+					quesArray[i].innerHTML = ("<div class='QueTextError'>"
+						+"("+(i+1)+")&nbsp&nbsp&nbsp&nbsp"+
+						+firstNum[i]+"&nbsp&nbsp×&nbsp&nbsp"
+						+secondNum[i] + "&nbsp&nbsp=&nbsp&nbsp"
+						+"<input type='text' class='inputAns'/>"
+						+"</div>");
+					
+					
+				}
+				inputAns[i].value = youWrite[i];
+			}
+			
+			score.value = "重出題目";
+			if(restart == true){
+				window.location.reload();
+			}
+			restart = true;
+			
+			
+			
+		  
+			<!-- console.log("你得到"+count+"分."); -->
+		
+			<!-- var hint = window.confirm("你得到 " + count + " 分!!!\n按確定或取消都可以重新開始!"); -->
+			<!-- if(hint == true || hint == false){ -->
+				<!-- count = 0; -->
+				<!-- window.location.reload(); -->
+			<!-- } -->
+			 
+			 /*  console.log(e.currentTarget)
+			  console.log(e.target)
+			  console.log(e.type)
+			  console.log(e.bubbles)
+			  console.log(e.cancelable)
+			  e.stopPropagation() */
+		},false);
+		
+
+		
+		function getRandomInt(max) {
+			return Math.floor(Math.random() * max);
+		}
+			
+	</script>
+</html>
+
+
+
+
